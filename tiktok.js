@@ -1,0 +1,97 @@
+// ==UserScript==
+// @name         TikTok Live Auto Clicker and Messenger
+// @namespace    http://tampermonkey.net/
+// @version      1.2
+// @description  TikTok canlı yayın sayfasındaki belirli bir elemente otomatik tıklatır, rastgele mesajlar gönderir ve dinamik menü ile etkileşime geçer
+// @author       Siz
+// @match        https://www.tiktok.com/@sivereklimm/live
+// @grant        none
+// ==/UserScript==
+
+(function() {
+    'use strict';
+
+    // CSS seçiciler
+    const clickSelector = '#tiktok-live-main-container-id > div.css-1fxlgrb-DivBodyContainer.etwpsg30 > div.css-l1npsx-DivLiveContentContainer.etwpsg31 > div > div.css-1xhpkj9-DivChatRoomAnimationContainer.e1089vbw2 > div.css-1nmb7mw-DivChatRoomContent.e1089vbw0 > div.css-lmgy6k-DivChatRoomContainer.ex6o5342 > div.css-11w1qwc-DivChatRoomBody.ex6o5343 > div.css-hm4yna-DivLikeContainer.ebnaa9i0 > div.css-4ldqvw-DivLikeBtnWrapper.ebnaa9i2 > div';
+    const messageSelector = 'div[contenteditable="plaintext-only"]';
+    const menuButtonSelector = 'i.css-123225j-IActionButton';
+    const menuItemSelector = 'a:nth-of-type(4) > span';
+
+    // Rastgele mesajlar
+    const messages = ["999", "99", "nerede bu millet", "sohbet yok gibi", "can sıkıntısı", "buralarda yeniyim", "Beğendim!", "neredesin osman", "ee hadi"];
+
+    // Rastgele bir mesaj seç
+    function getRandomMessage() {
+        return messages[Math.floor(Math.random() * messages.length)];
+    }
+
+    // Elementi bul ve 10 kere tıklat
+    function clickElement() {
+        const element = document.querySelector(clickSelector);
+        if (element) {
+            for (let i = 0; i < 10; i++) {
+                setTimeout(() => {
+                    element.click();
+                    console.log(`Elemente ${i + 1} kere tıklatıldı.`);
+                }, i * 1000); // 1 saniye aralıklarla tıklama
+            }
+        } else {
+            console.log('Element bulunamadı.');
+        }
+    }
+
+    // Mesaj gönder
+    function sendMessage() {
+        const messageElement = document.querySelector(messageSelector);
+        if (messageElement) {
+            const message = getRandomMessage();
+            messageElement.innerText = message;
+
+            // Enter tuşuna basma simülasyonu
+            const event = new KeyboardEvent('keydown', {
+                bubbles: true,
+                cancelable: true,
+                key: 'Enter',
+                code: 'Enter'
+            });
+            setTimeout(() => {
+                messageElement.dispatchEvent(event);
+                console.log(`Mesaj gönderildi: ${message}`);
+            }, 1000); // Mesaj yazıldıktan 1 saniye sonra gönder
+        } else {
+            console.log('Mesaj yazma alanı bulunamadı.');
+        }
+    }
+
+    // Menü açma ve tıklama
+    function openMenuAndClick() {
+        document.querySelector(menuButtonSelector).dispatchEvent(new MouseEvent('mouseover', { bubbles: true }));
+
+        setTimeout(function() {
+            var menuItem = document.querySelector(menuItemSelector);
+            console.log(menuItem);
+            if (menuItem) {
+                menuItem.click();
+            } else {
+                console.error("Menü öğesi bulunamadı.");
+            }
+        }, 1000); // 1 saniye gecikme
+    }
+
+    // İşlemi başlat ve rastgele aralıklarla tekrar et
+    function startProcess() {
+        openMenuAndClick();
+        clickElement();
+        sendMessage();
+
+        // 60 ile 120 saniye arasında rastgele bir süre belirle
+        const randomInterval = Math.floor(Math.random() * 60000) + 60000;
+        console.log(`Bir sonraki işlem ${randomInterval / 1000} saniye sonra yapılacak.`);
+
+        // Rastgele süre geçtikten sonra işlemi tekrar başlat
+        setTimeout(startProcess, randomInterval);
+    }
+
+    // Sayfa tamamen yüklendikten sonra 5 saniye bekle ve işlemi başlat
+    setTimeout(startProcess, 5000);
+})();
