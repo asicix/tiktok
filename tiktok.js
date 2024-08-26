@@ -38,6 +38,10 @@
         } else {
             console.log('Element bulunamadı.');
         }
+
+        // Bir sonraki tıklama işlemini 1 ile 3 dakika arasında rastgele bir sürede tekrar başlat
+        const randomInterval = Math.floor(Math.random() * 120000) + 60000; // 60.000 ms ile 180.000 ms (1 ile 3 dakika)
+        setTimeout(clickElement, randomInterval);
     }
 
     // Mesaj gönder
@@ -61,6 +65,10 @@
         } else {
             console.log('Mesaj yazma alanı bulunamadı.');
         }
+
+        // Bir sonraki mesaj gönderme işlemini 3 ile 5 dakika arasında rastgele bir sürede tekrar başlat
+        const randomInterval = Math.floor(Math.random() * 120000) + 180000; // 180.000 ms ile 300.000 ms (3 ile 5 dakika)
+        setTimeout(sendMessage, randomInterval);
     }
 
     // Menü açma ve tıklama
@@ -76,22 +84,16 @@
                 console.error("Menü öğesi bulunamadı.");
             }
         }, 1000); // 1 saniye gecikme
+
+        // Bir sonraki menü işlemini 5 ile 10 dakika arasında rastgele bir sürede tekrar başlat
+        const randomInterval = Math.floor(Math.random() * 300000) + 300000; // 300.000 ms ile 600.000 ms (5 ile 10 dakika)
+        setTimeout(openMenuAndClick, randomInterval);
     }
 
-    // İşlemi başlat ve rastgele aralıklarla tekrar et
-    function startProcess() {
-        openMenuAndClick();
+    // Sayfa tamamen yüklendikten sonra 5 saniye bekle ve işlemleri başlat
+    setTimeout(() => {
         clickElement();
         sendMessage();
-
-        // 60 ile 120 saniye arasında rastgele bir süre belirle
-        const randomInterval = Math.floor(Math.random() * 60000) + 60000;
-        console.log(`Bir sonraki işlem ${randomInterval / 1000} saniye sonra yapılacak.`);
-
-        // Rastgele süre geçtikten sonra işlemi tekrar başlat
-        setTimeout(startProcess, randomInterval);
-    }
-
-    // Sayfa tamamen yüklendikten sonra 5 saniye bekle ve işlemi başlat
-    setTimeout(startProcess, 5000);
+        openMenuAndClick();
+    }, 5000);
 })();
