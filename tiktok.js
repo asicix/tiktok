@@ -18,7 +18,7 @@
     const menuItemSelector = 'a:nth-of-type(4) > span';
 
     // Rastgele mesajlar
-    const messages = ["999", "99", "nerede bu millet", "sohbet yok gibi", "can sıkıntısı", "buralarda yeniyim", "Beğendim!", "neredesin osman", "ee hadi"];
+    const messages = ["999", "99", "99", "9999", ".", "!!!", "...", "??", "ee hadi"];
 
     // Rastgele bir mesaj seç
     function getRandomMessage() {
@@ -86,7 +86,7 @@
         }, 1000); // 1 saniye gecikme
 
         // Bir sonraki menü işlemini 5 ile 10 dakika arasında rastgele bir sürede tekrar başlat
-        const randomInterval = Math.floor(Math.random() * 300000) + 300000; // 300.000 ms ile 600.000 ms (5 ile 10 dakika)
+        const randomInterval = Math.floor(Math.random() * 300000) + 900000; // 300.000 ms ile 600.000 ms (5 ile 10 dakika)
         setTimeout(openMenuAndClick, randomInterval);
     }
 
