@@ -4,7 +4,7 @@
 // @version      1.2
 // @description  TikTok canlı yayın sayfasındaki belirli bir elemente otomatik tıklatır, rastgele mesajlar gönderir ve dinamik menü ile etkileşime geçer
 // @author       Siz
-// @match        https://www.tiktok.com/@sivereklimm/live
+// @match        https://www.tiktok.com/@ibocan281/live
 // @grant        none
 // ==/UserScript==
 
