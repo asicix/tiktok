@@ -4,7 +4,7 @@
 // @version      1.2
 // @description  TikTok canlı yayın sayfasındaki belirli bir elemente otomatik tıklatır, rastgele mesajlar gönderir ve dinamik menü ile etkileşime geçer
 // @author       Siz
-// @match        https://www.tiktok.com/@ibocan281/live
+// @match        https://www.tiktok.com/@sivereklimm/live
 // @grant        none
 // ==/UserScript==
 
@@ -12,7 +12,7 @@
     'use strict';
 
     // CSS seçiciler
-    const clickSelector = '#tiktok-live-main-container-id > div.css-1fxlgrb-DivBodyContainer.etwpsg30 > div.css-l1npsx-DivLiveContentContainer.etwpsg31 > div > div.css-1xhpkj9-DivChatRoomAnimationContainer.e1089vbw2 > div.css-1nmb7mw-DivChatRoomContent.e1089vbw0 > div.css-lmgy6k-DivChatRoomContainer.ex6o5342 > div.css-11w1qwc-DivChatRoomBody.ex6o5343 > div.css-hm4yna-DivLikeContainer.ebnaa9i0 > div.css-4ldqvw-DivLikeBtnWrapper.ebnaa9i2 > div';
+    const clickSelector = '#tiktok-live-main-container-id > div.css-1fxlgrb-DivBodyContainer.e1m6gol50 > div.css-l1npsx-DivLiveContentContainer.e1m6gol51 > div > div.css-1xhpkj9-DivChatRoomAnimationContainer.e205vgw2 > div.css-1nmb7mw-DivChatRoomContent.e205vgw0 > div.css-lmgy6k-DivChatRoomContainer.ex6o5342 > div.css-11w1qwc-DivChatRoomBody.ex6o5343 > div.css-hm4yna-DivLikeContainer.ebnaa9i0 > div.css-4ldqvw-DivLikeBtnWrapper.ebnaa9i2 > div';
     const messageSelector = 'div[contenteditable="plaintext-only"]';
     const menuButtonSelector = 'i.css-123225j-IActionButton';
     const menuItemSelector = 'a:nth-of-type(4) > span';
