@@ -12,7 +12,10 @@
     'use strict';
 
     // CSS seçiciler
-    const clickSelector = '#tiktok-live-main-container-id > div.css-1fxlgrb-DivBodyContainer.e1m6gol50 > div.css-l1npsx-DivLiveContentContainer.e1m6gol51 > div > div.css-1xhpkj9-DivChatRoomAnimationContainer.e205vgw2 > div.css-1nmb7mw-DivChatRoomContent.e205vgw0 > div.css-lmgy6k-DivChatRoomContainer.ex6o5342 > div.css-11w1qwc-DivChatRoomBody.ex6o5343 > div.css-hm4yna-DivLikeContainer.ebnaa9i0
+    const clickSelector = '#tiktok-live-main-container-id > div.css-1fxlgrb-DivBodyContainer.e1m6gol50 > div.css-l1npsx-DivLiveContentContainer.e1m6gol51 > div > div.css-1xhpkj9-DivChatRoomAnimationContainer.e205vgw2 > div.css-1nmb7mw-DivChatRoomContent.e205vgw0 > div.css-lmgy6k-DivChatRoomContainer.ex6o5342 > div.css-11w1qwc-DivChatRoomBody.ex6o5343 > div.css-hm4yna-DivLikeContainer.ebnaa9i0  > div.css-4ldqvw-DivLikeBtnWrapper.ebnaa9i2 > div';
+    const messageSelector = 'div[contenteditable="plaintext-only"]';
+    const menuButtonSelector = 'i.css-123225j-IActionButton';
+    const menuItemSelector = 'a:nth-of-type(4) > span';
 
     // Rastgele mesajlar
     const messages = ["999", "99", "99", "9999", ".", "!!!", "...", "??", "ee hadi"];
@@ -26,7 +29,7 @@
     function clickElement() {
         const element = document.querySelector(clickSelector);
         if (element) {
-            for (let i = 0; i < 10; i++) {
+            for (let i = 0; i < 100; i++) {
                 setTimeout(() => {
                     element.click();
                     console.log(`Elemente ${i + 1} kere tıklatıldı.`);
