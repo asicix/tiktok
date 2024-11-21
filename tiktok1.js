@@ -18,7 +18,7 @@
     const menuItemSelector = 'a:nth-of-type(4) > span';
 
     // Rastgele mesajlar
-    const messages = ["999", "99", "99", "9999", ".", "!!!", "...", "??", "ee hadi"];
+    const messages = ["999", "99", "99", "9999", "Güzelmiş", "takib için teşekür ederim", "İyi Yayınlar..", "ee hadi neden takip etmiyorsunuz"];
 
     // Rastgele bir mesaj seç
     function getRandomMessage() {
@@ -29,7 +29,7 @@
     function clickElement() {
         const element = document.querySelector(clickSelector);
         if (element) {
-            for (let i = 0; i < 100; i++) {
+            for (let i = 0; i < 10; i++) {
                 setTimeout(() => {
                     element.click();
                     console.log(`Elemente ${i + 1} kere tıklatıldı.`);
