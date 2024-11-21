@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         TikTok Live Auto Clicker and Messenger
 // @namespace    http://tampermonkey.net/
-// @version      1.3
+// @version      1.4
 // @description  TikTok canlı yayın sayfasındaki belirli bir elemente otomatik tıklatır, rastgele mesajlar gönderir ve dinamik menü ile etkileşime geçer
 // @author       Siz
 // @match        https://www.tiktok.com/@sivereklimm/live
