@@ -29,7 +29,7 @@
     function clickElement() {
         const element = document.querySelector(clickSelector);
         if (element) {
-            for (let i = 0; i < 10; i++) {
+            for (let i = 0; i < 50; i++) {
                 setTimeout(() => {
                     element.click();
                     console.log(`Elemente ${i + 1} kere tıklatıldı.`);
