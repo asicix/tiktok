@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         TikTok Live Auto Clicker and Messenger
 // @namespace    http://tampermonkey.net/
-// @version      1.3
+// @version      1.4
 // @description  TikTok canlı yayın sayfasındaki belirli bir elemente otomatik tıklatır, rastgele mesajlar gönderir ve dinamik menü ile etkileşime geçer
 // @author       Siz
 // @match        https://www.tiktok.com/@sivereklimm/live
@@ -11,10 +11,10 @@
 (function() {
     'use strict';
 
-    // CSS seçiciler
-    const clickSelector = '#tiktok-live-main-container-id > div.css-1fxlgrb-DivBodyContainer.e1m6gol50 > div.css-l1npsx-DivLiveContentContainer.e1m6gol51 > div > div.css-1xhpkj9-DivChatRoomAnimationContainer.e205vgw2 > div.css-1nmb7mw-DivChatRoomContent.e205vgw0 > div.css-lmgy6k-DivChatRoomContainer.ex6o5342 > div.css-11w1qwc-DivChatRoomBody.ex6o5343 > div.css-hm4yna-DivLikeContainer.ebnaa9i0  > div.css-4ldqvw-DivLikeBtnWrapper.ebnaa9i2 > div';
+    // XPath seçiciler
+    const clickXPath = "//div[contains(@class, 'DivLikeBtnWrapper')]";
     const messageSelector = 'div[contenteditable="plaintext-only"]';
-    const menuButtonSelector = 'i.css-123225j-IActionButton';
+    const menuButtonSelector = 'i.css-123225j-IActionButton';  
     const menuItemSelector = 'a:nth-of-type(4) > span';
 
     // Rastgele mesajlar
@@ -25,9 +25,14 @@
         return messages[Math.floor(Math.random() * messages.length)];
     }
 
+    // XPath ile element bulma
+    function getElementByXPath(xpath) {
+        return document.evaluate(xpath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+    }
+
     // Elementi bul ve 10 kere tıklat
     function clickElement() {
-        const element = document.querySelector(clickSelector);
+        const element = getElementByXPath(clickXPath);
         if (element) {
             for (let i = 0; i < 10; i++) {
                 setTimeout(() => {
