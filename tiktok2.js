@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         TikTok Live Auto Clicker and Messenger
 // @namespace    http://tampermonkey.net/
-// @version      1.5
+// @version      1.6
 // @description  TikTok canlı yayın sayfasındaki belirli bir elemente otomatik tıklatır, rastgele mesajlar gönderir ve dinamik menü ile etkileşime geçer
 // @author       Siz
 // @match        https://www.tiktok.com/@sivereklimm/live
@@ -18,7 +18,7 @@
     const menuItemSelector = 'a:nth-of-type(4) > span';
 
     // Rastgele mesajlar
-    const messages = ["999", "99", "99", "9999", "Güzelmiş", "takib için teşekür ederim", "İyi Yayınlar..", "ee hadi neden takip etmiyorsunuz"];
+    const messages = ["999", "99", "99", "9999", "Geri Dnnüş yapmaynın..", "hani geri takibler", "99", "Böyle devam haydii..", "takib için teşekür ederim", "İyi Yayınlar..", "ee hadi neden takib etmiyorsunuz"];
 
     // Rastgele bir mesaj seç
     function getRandomMessage() {
