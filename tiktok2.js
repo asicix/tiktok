@@ -18,7 +18,7 @@
     const menuItemSelector = 'a:nth-of-type(4) > span';
 
     // Rastgele mesajlar
-    const messages = ["999", "99", "99", "9999", "Geri Dnnüş yapmaynın..", "hani geri takibler", "99", "Böyle devam haydii..", "takib için teşekür ederim", "İyi Yayınlar..", "ee hadi neden takib etmiyorsunuz"];
+    const messages = ["999", "99", "99", "9999", "Geri Dönüş yapmayan Kaynanası ile ömrü billa yaşasın", "hani geri takibler", "99", "Böyle devam haydii..", "takib için teşekür ederim", "İyi Yayınlar..", "ee hadi neden takib etmiyorsunuz"];
 
     // Rastgele bir mesaj seç
     function getRandomMessage() {
