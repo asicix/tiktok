@@ -11,20 +11,16 @@
 (function() {
     'use strict';
 
-    // Mesajların bulunduğu .txt dosyasının URL'si
-    const txtFileUrl = 'https://raw.githubusercontent.com/asicix/tiktok/refs/heads/main/list.txt';
-    let messages = [];
+  function fetchMessages() {
+    fetch(txtFileUrl)
+        .then(response => response.text())
+        .then(data => {
+            messages = data.split('\n').filter(msg => msg.trim() !== ''); // Satırları ayır ve boş satırları temizle
+            console.log('Mesajlar yüklendi:', messages);
+        })
+        .catch(error => console.error('Mesaj dosyası yüklenemedi:', error));
+}
 
-    // .txt dosyasından mesajları al
-    function fetchMessages() {
-        fetch(txtFileUrl)
-            .then(response => response.text())
-            .then(data => {
-                messages = data.split('\n').filter(msg => msg.trim() !== ''); // Satırları ayır ve boş satırları temizle
-                console.log('Mesajlar yüklendi:', messages);
-            })
-            .catch(error => console.error('Mesaj dosyası yüklenemedi:', error));
-    }
 
     // Rastgele bir mesaj seç
     function getRandomMessage() {
