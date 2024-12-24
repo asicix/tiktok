@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         TikTok Live Auto Clicker and Messenger
 // @namespace    http://tampermonkey.net/
-// @version      2.0
+// @version      1.8
 // @description  TikTok canlı yayın sayfasındaki belirli bir elemente otomatik tıklatır, rastgele mesajlar gönderir ve dinamik menü ile etkileşime geçer
 // @author       Siz
 // @match        https://www.tiktok.com/@sivereklimm/live
@@ -11,29 +11,17 @@
 (function() {
     'use strict';
 
-    // Mesajların bulunduğu .txt dosyasının URL'si
-    const txtFileUrl = 'https://raw.githubusercontent.com/asicix/tiktok/refs/heads/main/list.txt';
-    let messages = [];
+    // XPath seçiciler
+    const clickXPath = "//div[contains(@class, 'DivLikeBtnWrapper')]";
+    const messageSelector = 'div[contenteditable="plaintext-only"]';
+    const menuButtonSelector = 'i.css-123225j-IActionButton';  
+    const menuItemSelector = 'a:nth-of-type(4) > span';
 
-    // .txt dosyasından mesajları al
-    function fetchMessages() {
-        fetch(txtFileUrl)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP hata durumu: ${response.status}`);
-                }
-                return response.text();
-            })
-            .then(data => {
-                messages = data.split('\n').filter(msg => msg.trim() !== ''); // Satırları ayır ve boş satırları temizle
-                console.log('Mesajlar yüklendi:', messages);
-            })
-            .catch(error => console.error('Mesaj dosyası yüklenemedi:', error));
-    }
+    // Rastgele mesajlar
+    const messages = ["99", "99", "99", "99", "99", "99", "99", "99", "99", "99", "99", "99", "99", "99", "99", "99", "99", "99", "İyi Yayınlar..", "99"];
 
     // Rastgele bir mesaj seç
     function getRandomMessage() {
-        if (messages.length === 0) return 'Mesajlar yükleniyor...'; // Mesajlar yüklenene kadar bir uyarı
         return messages[Math.floor(Math.random() * messages.length)];
     }
 
@@ -49,14 +37,13 @@
 
     // Elementi bul ve 7 ile 10 kere arasında rastgele tıklat
     function clickElement() {
-        const clickXPath = "//div[contains(@class, 'DivLikeBtnWrapper')]";
         const element = getElementByXPath(clickXPath);
         if (element) {
             const clicks = getRandomNumber(7, 10); // 7 ile 10 arasında rastgele sayı
             for (let i = 0; i < clicks; i++) {
                 setTimeout(() => {
                     element.click();
-                    console.log(`Elemente ${i + 1}. kez tıklatıldı.`);
+                    console.log(Elemente ${i + 1}. kez tıklatıldı.);
                 }, i * 1000); // 1 saniye aralıklarla tıklama
             }
         } else {
@@ -70,7 +57,6 @@
 
     // Mesaj gönder
     function sendMessage() {
-        const messageSelector = 'div[contenteditable="plaintext-only"]';
         const messageElement = document.querySelector(messageSelector);
         if (messageElement) {
             const message = getRandomMessage();
@@ -85,7 +71,7 @@
             });
             setTimeout(() => {
                 messageElement.dispatchEvent(event);
-                console.log(`Mesaj gönderildi: ${message}`);
+                console.log(Mesaj gönderildi: ${message});
             }, 1000); // Mesaj yazıldıktan 1 saniye sonra gönder
         } else {
             console.log('Mesaj yazma alanı bulunamadı.');
@@ -96,12 +82,33 @@
         setTimeout(sendMessage, randomInterval);
     }
 
-    // Sayfa tamamen yüklendikten sonra mesajları yükle ve işlemleri başlat
+    // Menü açma ve tıklama
+    function openMenuAndClick() {
+        document.querySelector(menuButtonSelector).dispatchEvent(new MouseEvent('mouseover', { bubbles: true }));
+
+        setTimeout(function() {
+            var menuItem = document.querySelector(menuItemSelector);
+            console.log(menuItem);
+            if (menuItem) {
+                menuItem.click();
+            } else {
+                console.error("Menü öğesi bulunamadı.");
+            }
+        }, 1000); // 1 saniye gecikme
+
+        // Bir sonraki menü işlemini 5 ile 10 dakika arasında rastgele bir sürede tekrar başlat
+        const randomInterval = getRandomNumber(300000, 600000); // 300.000 ms ile 600.000 ms (5 ile 10 dakika)
+        setTimeout(openMenuAndClick, randomInterval);
+    }
+
+    // Sayfa tamamen yüklendikten sonra 5 ile 10 saniye arasında bekle ve işlemleri başlat
     setTimeout(() => {
-        fetchMessages(); // Mesajları .txt dosyasından al
-        setTimeout(() => {
-            clickElement();
-            sendMessage();
-        }, 5000); // 5 saniye gecikme
-    }, 5000); // 5 saniye başlangıç gecikmesi
+        clickElement();
+        sendMessage();
+    }, getRandomNumber(5000, 10000)); // 5 ile 10 saniye arasında rastgele bir gecikme
+
+    // Menü işlemini başlatmayı 5 dakika sonra yap
+    setTimeout(() => {
+        openMenuAndClick();
+    }, 300000); // 300.000 ms (5 dakika)
 })();
